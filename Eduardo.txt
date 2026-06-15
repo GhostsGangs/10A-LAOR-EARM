@@ -1,0 +1,2 @@
+Nombre: Eduardo Mendoza
+Rol: Desarrollo del login, registro de usuarios y funciones principales de la aplicación.
