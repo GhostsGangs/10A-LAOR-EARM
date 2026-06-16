@@ -1,0 +1,6 @@
+Módulo: Login
+Funciones:
+- Inicio de sesión
+- Validación de usuarios
+- Conexiones
+
