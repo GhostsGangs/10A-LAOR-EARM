@@ -2,4 +2,5 @@ Módulo: Login
 Funciones:
 - Inicio de sesión
 - Validación de usuarios
-- Conexión con Firebase
+- Conexiones
+
