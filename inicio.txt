@@ -1,0 +1,6 @@
+Modulo: Inicio
+Funciones:
+- Mostrar pantalla principal atractiva y fácil de usar.
+- Permitir acceso a iniciar sesión o registrarse.
+- Mostrar menú de navegación principal.
+- Adaptarse a diferentes dispositivos (responsive).
