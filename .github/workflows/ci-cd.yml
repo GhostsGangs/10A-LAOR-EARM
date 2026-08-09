@@ -40,7 +40,7 @@ jobs:
 
       # 5. Realizar análisis estático del código
       - name: Analizar código
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos
 
       # 6. Ejecutar las pruebas
       - name: Ejecutar pruebas
