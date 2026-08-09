@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "450584437388",
+    "project_id": "tacoexpress-a4ba6",
+    "storage_bucket": "tacoexpress-a4ba6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450584437388:android:61770b3d2f44f7ac3891a9",
+        "android_client_info": {
+          "package_name": "com.example.taco_express"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7MSJCifi3qiMVrmEpV-Pl6AN_3ypa050"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
