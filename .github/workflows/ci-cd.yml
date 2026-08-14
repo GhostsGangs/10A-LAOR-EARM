@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - feature/toma_pedidos
   pull_request:
     branches:
       - main
@@ -56,3 +57,7 @@ jobs:
         with:
           name: tacoexpress-apk
           path: build/app/outputs/flutter-apk/app-debug.apk
+
+      # 9. Construir la imagen Docker
+      - name: Construir imagen Docker
+        run: docker build -t tacoexpress .
