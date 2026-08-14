@@ -6,6 +6,7 @@ on:
       - main
       - develop
       - feature/toma_pedidos
+
   pull_request:
     branches:
       - main
@@ -17,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Descargar el código del repositorio
+
+      # 1. Descargar el codigo del repositorio
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
@@ -39,25 +41,50 @@ jobs:
       - name: Instalar dependencias
         run: flutter pub get
 
-      # 5. Realizar análisis estático del código
-      - name: Analizar código
+      # 5. Realizar analisis estatico del codigo
+      - name: Analizar codigo
         run: flutter analyze --no-fatal-infos
 
       # 6. Ejecutar las pruebas
       - name: Ejecutar pruebas
         run: flutter test
 
-      # 7. Construir el APK de Android
-      - name: Construir APK
+      # 7. Construir APK de prueba
+      - name: Construir APK Debug
         run: flutter build apk --debug
 
-      # 8. Guardar el APK generado como artefacto
-      - name: Guardar APK
+      # 8. Guardar APK de prueba como artefacto
+      - name: Guardar APK Debug
         uses: actions/upload-artifact@v4
         with:
-          name: tacoexpress-apk
+          name: tacoexpress-apk-debug
           path: build/app/outputs/flutter-apk/app-debug.apk
 
-      # 9. Construir la imagen Docker
+      # 9. Construir APK Release para Staging
+      - name: Construir APK Release
+        run: flutter build apk --release
+
+      # 10. Instalar Firebase CLI
+      - name: Instalar Firebase CLI
+        run: npm install -g firebase-tools
+
+      # 11. Configurar credenciales de Firebase
+      - name: Configurar credenciales Firebase
+        if: github.ref == 'refs/heads/develop'
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/firebase-service-account.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-service-account.json" >> "$GITHUB_ENV"
+
+      # 12. Distribuir APK a Firebase App Distribution
+      - name: Distribuir APK a Staging
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+            --app "1:450584437388:android:61770b3d2f44f7ac3891a9" \
+            --release-notes "TacoExpress - Build de Staging"
+
+      # 13. Construir imagen Docker
       - name: Construir imagen Docker
         run: docker build -t tacoexpress .
